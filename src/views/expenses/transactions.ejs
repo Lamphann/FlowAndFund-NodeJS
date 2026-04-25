@@ -1,0 +1,110 @@
+<%- include('../components/sidebar') %>
+
+<main class="ml-72 pt-8 px-12 pb-20 max-w-[1600px] min-h-screen">
+    <%- include('../components/topbar') %>
+
+    <section class="grid grid-cols-12 gap-10 mt-8">
+        <div class="col-span-12 lg:col-span-8 flex flex-col gap-8">
+            <div class="flex items-end justify-between">
+                <div>
+                    <p class="text-slate-400 font-bold text-xs mb-1 uppercase tracking-[0.2em]">Tổng quan tháng này</p>
+                    <h3 class="text-5xl font-extrabold text-on-surface tracking-tighter">
+                        <%= total >= 0 ? '+' : '' %><%= formatMoney(total) %>
+                    </h3>
+                </div>
+                <div class="flex gap-3">
+                    <button class="px-6 py-3 rounded-full bg-white border border-violet-100 text-on-surface text-sm font-bold flex items-center gap-2 shadow-sm hover:shadow-md transition-all">
+                        <span class="material-symbols-outlined text-lg">calendar_today</span> 7 ngày qua
+                    </button>
+                    <button class="px-6 py-3 rounded-full bg-white border border-violet-100 text-on-surface text-sm font-bold flex items-center gap-2 shadow-sm hover:shadow-md transition-all">
+                        <span class="material-symbols-outlined text-lg">filter_list</span> Bộ lọc
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-sm border border-violet-100 overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface-container-low/50 border-b border-violet-50">
+                            <th class="px-10 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Ngày</th>
+                            <th class="px-10 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Danh mục</th>
+                            <th class="px-10 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Mô tả</th>
+                            <th class="px-10 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest text-right">Số tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-violet-50">
+                        <% if (expenses && expenses.length > 0) { %>
+                            <% expenses.forEach(item => { %>
+                                <tr class="group hover:bg-surface-container-low transition-colors cursor-pointer">
+                                    <td class="px-10 py-7 text-sm">
+                                        <div class="flex flex-col">
+                                            <span class="font-bold text-on-surface"><%= new Date(item.createdAt).toLocaleDateString('vi-VN') %></span>
+                                            <span class="text-xs text-slate-400 font-medium mt-1"><%= new Date(item.createdAt).toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'}) %></span>
+                                        </div>
+                                    </td>
+                                    <td class="px-10 py-7">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-12 h-12 rounded-2xl bg-<%= getCategory(item.category).color %>/10 text-<%= getCategory(item.category).color %> flex items-center justify-center">
+                                                <span class="material-symbols-outlined text-2xl">
+                                                    <%= getCategory(item.category).icon %>
+                                                </span>
+                                            </div>
+                                            <span class="font-bold text-on-surface"><%= item.category %></span>
+                                        </div>
+                                    </td>
+                                    <td class="px-10 py-7 text-slate-500 font-medium"><%= item.note %></td>
+                                    <td class="px-10 py-7 text-right font-black <%= item.type === 'income' ? 'text-tertiary' : 'text-error' %> text-lg">
+                                        <%= item.type === 'income' ? '+' : '-' %> <%= formatMoney(item.amount) %>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td colspan="4" class="px-10 py-12 text-center text-slate-400 font-medium italic">Chưa có giao dịch nào được ghi nhận.</td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-span-12 lg:col-span-4 space-y-8">
+            <div class="bg-primary/5 rounded-[2.5rem] p-10 border border-primary/10 relative overflow-hidden">
+                <h4 class="text-xl font-bold text-on-surface mb-8 relative z-10">Phân bổ chi tiêu</h4>
+                <div class="space-y-6 relative z-10">
+                    <div class="group/bar">
+                        <div class="flex justify-between text-sm font-bold mb-2.5">
+                            <span class="text-slate-500">Thiết yếu</span><span>45%</span>
+                        </div>
+                        <div class="w-full bg-white/50 h-3 rounded-full overflow-hidden p-0.5">
+                            <div class="bg-primary h-full rounded-full w-[45%]"></div>
+                        </div>
+                    </div>
+                    <div class="group/bar">
+                        <div class="flex justify-between text-sm font-bold mb-2.5">
+                            <span class="text-slate-500">Giải trí</span><span>20%</span>
+                        </div>
+                        <div class="w-full bg-white/50 h-3 rounded-full overflow-hidden p-0.5">
+                            <div class="bg-tertiary h-full rounded-full w-[20%]"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-[2.5rem] p-8 border border-violet-100 shadow-sm">
+                <h4 class="text-lg font-bold text-on-surface mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span> Mẹo tiết kiệm
+                </h4>
+                <div class="flex gap-5">
+                    <div class="w-14 h-14 shrink-0 rounded-2xl bg-green-50 flex items-center justify-center text-tertiary">
+                        <span class="material-symbols-outlined text-3xl">lightbulb</span>
+                    </div>
+                    <div>
+                        <p class="text-base font-bold text-on-surface mb-1.5">Cắt giảm ăn ngoài</p>
+                        <p class="text-sm text-slate-500 leading-relaxed">Bạn đã chi nhiều hơn <span class="font-bold text-error">15%</span> so với tháng trước. Thử nấu ăn tại nhà nhé!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

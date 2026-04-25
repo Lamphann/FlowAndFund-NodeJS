@@ -1,0 +1,48 @@
+<aside class="h-screen w-72 flex flex-col fixed left-0 top-0 py-10 px-8 space-y-10 glass-sidebar border-r border-violet-100 z-50">
+    <div class="flex items-center gap-4 px-2">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white shadow-lg shadow-primary/20">
+            <span class="material-symbols-outlined text-2xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+        </div>
+        <div>
+            <h1 class="text-xl font-extrabold tracking-tight text-primary leading-none">Flow & Fund</h1>
+            <p class="text-[10px] uppercase tracking-widest font-bold text-slate-400 mt-1">Digital Ledger</p>
+        </div>
+    </div>
+
+    <nav class="flex-1 space-y-1">
+        <a class="flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 <%= title === 'Flow & Fund' ? 'text-primary font-bold bg-white shadow-sm border border-violet-50' : 'text-slate-400 font-medium hover:text-primary hover:bg-white/50' %>" href="/expenses">
+            <span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+            <span>Tổng quan</span>
+            <% if (title === 'Flow & Fund') { %>
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <% } %>
+        </a>
+        
+        <a class="flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 <%= title === 'Danh sách giao dịch' ? 'text-primary font-bold bg-white shadow-sm border border-violet-50' : 'text-slate-400 font-medium hover:text-primary hover:bg-white/50' %>" href="/expenses/transactions">
+            <span class="material-symbols-outlined text-xl" data-icon="receipt_long">receipt_long</span>
+            <span>Giao dịch</span>
+            <% if (title === 'Danh sách giao dịch') { %>
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <% } %>
+        </a>
+
+        <a class="flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 <%= title === 'Ngân sách của bạn' ? 'text-primary font-bold bg-white shadow-sm border border-violet-50' : 'text-slate-400 font-medium hover:text-primary hover:bg-white/50' %>" href="/expenses/budget">
+            <span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">payments</span>
+            <span>Ngân sách</span>
+            <% if (title === 'Ngân sách của bạn') { %>
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <% } %>
+        </a>
+        
+        <a class="flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-300 text-slate-400 font-medium hover:text-primary hover:bg-white/50" href="#">
+            <span class="material-symbols-outlined text-xl" data-icon="person">person</span>
+            <span>Hồ sơ</span>
+        </a>
+    </nav>
+    <div class="mt-auto">
+        <a class="flex items-center gap-4 px-4 py-3 rounded-2xl transition-all duration-300 text-slate-400 font-medium hover:text-error hover:bg-error/5" href="/logout">
+            <span class="material-symbols-outlined" data-icon="logout">logout</span>
+            <span>Đăng xuất</span>
+        </a>
+    </div>
+</aside>

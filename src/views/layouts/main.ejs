@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title><%= title %> - Flow & Fund</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8147FF",
+                        "primary-container": "#8147ff",
+                        "on-primary": "#ffffff",
+                        "background": "#fdf7ff",
+                        "on-background": "#1d1a24",
+                        "surface": "#fdf7ff",
+                        "on-surface": "#1d1a24",
+                        "error": "#ba1a1a",
+                        "tertiary": "#006546",
+                        "surface-container-highest": "#e7e0ef",
+                        "surface-container-low": "#f8f1ff",
+                    
+                    },
+                    fontFamily: {
+                        sans: ["Be Vietnam Pro", "sans-serif"],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-sidebar { backdrop-filter: blur(24px); background: rgba(253, 247, 255, 0.7); }
+        .chart-path { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: dash 3s ease-in-out forwards; }
+        @keyframes dash { to { stroke-dashoffset: 0; } }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-sans antialiased">
+    
+    <%- body %> </body>
+</html>

@@ -1,0 +1,72 @@
+<div class="max-w-5xl mx-auto mt-10">
+
+    <!-- HEADER -->
+    <div class="bg-gradient-to-r from-pink-500 to-purple-600 text-white p-6 rounded-2xl shadow-lg">
+        <h1 class="text-2xl font-bold"> Quản lý chi tiêu</h1>
+        <a href="/logout" class="text-sm underline">Logout</a>
+
+        <h2 class="text-3xl font-bold mt-4">
+            Tổng số dư: 
+            <%= total.toLocaleString("vi-VN") %> đ
+        </h2>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="grid grid-cols-2 gap-4 mt-6">
+        <div class="bg-white p-4 rounded-xl shadow text-green-600">
+            <p>Thu</p>
+            <p class="text-xl font-bold">
+                + <%= income.toLocaleString("vi-VN") %> đ
+            </p>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl shadow text-red-500">
+            <p>Chi</p>
+            <p class="text-xl font-bold">
+                - <%= expense.toLocaleString("vi-VN") %> đ
+            </p>
+        </div>
+    </div>
+
+    <!-- FORM -->
+    <form action="/expenses/add" method="POST" class="bg-white p-4 mt-6 rounded-xl shadow flex gap-2">
+        <input name="title" placeholder="Tên" class="border p-2 rounded w-1/4">
+        <input name="amount" type="number" placeholder="Số tiền" class="border p-2 rounded w-1/4">
+
+        <select name="type" class="border p-2 rounded">
+            <option value="expense">Chi tiêu</option>
+            <option value="income">Thu nhập</option>
+        </select>
+
+        <select name="category" class="border p-2 rounded">
+            <option>Ăn uống</option>
+            <option>Di chuyển</option>
+            <option>Mua sắm</option>
+            <option>Giải trí</option>
+            <option>Lương</option>
+        </select>
+
+        <button class="bg-purple-600 text-white px-4 rounded">Thêm</button>
+    </form>
+
+    <!-- LIST -->
+    <div class="bg-white mt-6 p-4 rounded-xl shadow">
+        <% expenses.forEach(item => { %>
+            <div class="flex justify-between border-b py-2">
+                <div>
+                    <p class="font-bold"><%= item.title %></p>
+                    <p class="text-sm text-gray-500"><%= item.category %></p>
+                </div>
+
+                <div class="text-right">
+                    <p class="<%= item.type === 'income' ? 'text-green-600' : 'text-red-500' %> font-bold">
+                        <%= item.type === 'income' ? '+' : '-' %>
+                        <%= item.amount.toLocaleString("vi-VN") %> đ
+                    </p>
+                    <a href="/expenses/delete/<%= item._id %>" class="text-blue-500 text-sm">Xóa</a>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+</div>
