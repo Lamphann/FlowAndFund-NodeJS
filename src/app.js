@@ -16,7 +16,6 @@ const expenseRoutes = require("./routes/expenseRoutes");
 
 const app = express();
 
-// MIDDLEWARE
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
